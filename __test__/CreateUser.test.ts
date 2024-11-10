@@ -24,6 +24,7 @@ test("should register a user with valid email", async () => {
   };
   const createUser = new CreateUser(InMemory);
   const user = await createUser.execute(input);
+  console.log(user);
   expect(user.id).toBeDefined();
   expect(user.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 });
