@@ -1,20 +1,15 @@
 import bcrypt from "bcrypt";
 import User from "../../../domain/entities/User";
 import UserRepository from "../../repositories/user/UserRepository";
+import Email from "../../../domain/entities/Email";
 
 export default class CreateUser {
   constructor(public repository: UserRepository) {}
   async execute(input: Input) {
     const { fullName, username, email, password, image } = input;
-    const user = new User(fullName, username, email, password, image);
-    try {
-      //user.verifyEmail();
-      user.createDefaultImage();
-      //user.verifyPassword();
-      //this.hashPassword(user.email);
-    } catch (err) {
-      console.log(err);
-    }
+    const validEmail = new Email(email).getValue();
+    const user = new User(fullName, username, validEmail, password, image);
+    user.createDefaultImage();
 
     return await this.repository.createUser(user);
   }

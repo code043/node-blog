@@ -28,7 +28,7 @@ export default class User implements UserData {
   }
   verifyEmail() {
     if (this.isValidEmail(this.email)) {
-      throw new Error("Invalid email");
+      return true;
     }
   }
   verifyPassword() {
