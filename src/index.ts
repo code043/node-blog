@@ -1,19 +1,18 @@
-import bcrypt from "bcrypt";
+import express from "express";
 
-const registerPass = "123";
-console.log("Registrando: ", registerPass);
+const app = express();
+const port = 8080;
 
-const hashPass = bcrypt.hashSync(registerPass, 10);
-console.log("Hash: ", hashPass);
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Blog",
+  });
+});
 
-const loginPass = "123";
-console.log("Logando: ", loginPass);
-console.log("Hash: ", hashPass);
-
-console.log(
-  bcrypt.compareSync(loginPass, hashPass)
-    ? "Senha correta!"
-    : "Senha incorreta!"
-);
-
-console.log("Running... ", new Date());
+app.listen(port, () => {
+  console.log({
+    text: "Server running",
+    http: "http://localhost:" + port,
+    date: new Date(),
+  });
+});
