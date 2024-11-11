@@ -1,6 +1,6 @@
-import InMemory from "../src/infra/repositories/in-memory/user/InMemory";
-import CreateUser from "../src/application/usecases/user/CreateUser";
-import Email from "../src/domain/entities/Email";
+import InMemory from "../../src/infra/repositories/in-memory/user/InMemory";
+import CreateUser from "../../src/application/usecases/user/CreateUser";
+import Email from "../../src/domain/entities/Email";
 test("should register a user", async () => {
   const input = {
     fullName: "John Doe",

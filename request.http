@@ -1,0 +1,14 @@
+get http://localhost:8080/user/eb1773c4-6d83-47a1-9320-6dbe4150724b
+
+### 
+
+post http://localhost:8080/user/register
+Content-Type: application/json 
+
+{
+   "fullName": "John Doe",
+   "username": "john023",
+   "email": "john01@email.com",
+   "password": "123"
+   
+}
