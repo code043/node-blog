@@ -17,19 +17,19 @@ Content-Type: application/json
 
 ### 
 # Posts
-get http://localhost:8080/posts
+get http://localhost:8080/blog/api/posts
 ###
-get http://localhost:8080/post/1
+get http://localhost:8080/blog/api/post/1
 
 ### 
 
-post http://localhost:8080/post
+post http://localhost:8080/blog/api/post
 Content-Type: application/json 
 
 {
    "title": "Learn Javascript first of learning NodeJs",
     "description": "NodeJs is a main javascript run time.",
    "content": "...",
-    "userId": "3bbe460f-b43b-46af-84f9-e61b7be62476",
+    "userId": "3bbe460f-b43b-46af-84f9-e61b7be62476"
    
 }
