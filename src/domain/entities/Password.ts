@@ -2,15 +2,16 @@ import crypto from "crypto";
 import bcrypt from "bcrypt";
 
 export default class Password {
-  constructor(readonly value: string, readonly salt: number) {
+  constructor(private value: string) {
     if (!this.isValid()) {
       throw new Error("Invalid password");
     }
   }
 
-  createHash(password: string, salt?: number) {
+  createHash(salt: number): Password {
     const generatedSalt = salt || crypto.randomBytes(20).toString("hex");
-    return bcrypt.hashSync(password, generatedSalt);
+    this.setValue(bcrypt.hashSync(this.value, generatedSalt));
+    return this;
   }
   isValid() {
     const minLength = 3;
@@ -20,7 +21,9 @@ export default class Password {
   compare(plainPassword: string) {
     return bcrypt.compareSync(plainPassword, this.value);
   }
-
+  setValue(hash: string) {
+    this.value = hash;
+  }
   getValue() {
     return this.value;
   }

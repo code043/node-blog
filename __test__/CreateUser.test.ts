@@ -1,5 +1,6 @@
 import InMemory from "../src/infra/repositories/in-memory/user/InMemory";
 import CreateUser from "../src/application/usecases/user/CreateUser";
+import Email from "../src/domain/entities/Email";
 test("should register a user", async () => {
   const input = {
     fullName: "John Doe",
@@ -27,6 +28,18 @@ test("should register a user with valid email", async () => {
   console.log(user);
   expect(user.id).toBeDefined();
   expect(user.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+});
+test("should do not register a user with invalid email", async () => {
+  const emails = [
+    "john01email.com",
+    "john01@email",
+    "john01email",
+    "john01@@email.com",
+    "john01@email..com",
+  ];
+  emails.forEach((email) => {
+    expect(() => new Email(email)).toThrow("Invalid email");
+  });
 });
 test("should register a user without image", async () => {
   const input = {

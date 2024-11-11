@@ -26,23 +26,7 @@ export default class User implements UserData {
     this.password = password;
     this.image = image;
   }
-  verifyEmail() {
-    if (this.isValidEmail(this.email)) {
-      return true;
-    }
-  }
-  verifyPassword() {
-    if (this.isValidPassword(this.email)) {
-      throw new Error("Invalid password");
-    }
-  }
-  private isValidPassword(password: string): boolean {
-    return password.length >= 2;
-  }
-  private isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
+
   createDefaultImage() {
     if (!this.image) {
       this.image =

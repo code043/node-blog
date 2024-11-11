@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import User from "../../../domain/entities/User";
 import UserRepository from "../../repositories/user/UserRepository";
 import Email from "../../../domain/entities/Email";
@@ -6,10 +5,10 @@ import Password from "../../../domain/entities/Password";
 
 export default class CreateUser {
   constructor(public repository: UserRepository) {}
-  async execute(input: Input) {
+  async execute(input: Input): Promise<Output> {
     const { fullName, username, email, password, image } = input;
     const validEmail = new Email(email).getValue();
-    const hashedPassword = new Password(password, 10).createHash(password, 10);
+    const hashedPassword = new Password(password).createHash(10).getValue();
     const user = new User(
       fullName,
       username,
@@ -19,7 +18,7 @@ export default class CreateUser {
     );
     user.createDefaultImage();
 
-    return await this.repository.createUser(user);
+    return (await this.repository.createUser(user)) as Output;
   }
 }
 
@@ -29,4 +28,12 @@ type Input = {
   email: string;
   password: string;
   image?: string | undefined;
+};
+type Output = {
+  fullName: string;
+  username: string;
+  email: string;
+  password: string;
+  image: string;
+  id: string;
 };
