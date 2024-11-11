@@ -29,7 +29,7 @@ class PostInMemory implements PostRepository {
     return this.posts.find((post) => post.id === id);
   }
   async getAllPost(): Promise<Post[]> {
-    throw new Error("Method not implemented.");
+    return this.posts;
   }
 }
 
