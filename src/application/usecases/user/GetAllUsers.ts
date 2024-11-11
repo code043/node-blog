@@ -11,7 +11,6 @@ type Output = {
   fullName: string;
   username: string;
   email: string;
-  password: string;
   image: string;
   id: string;
 };

@@ -37,10 +37,14 @@ app.post("/user/register", async (req, res) => {
   const createUser = new CreateUser(InMemory);
   const user = await createUser.execute(bodyData);
   console.log(user);
-  res.status(201).json({
-    message: "User has been created",
-    data: user,
-  });
+  if (!user) {
+    res.status(400).json({ message: "Email ja exist" });
+  } else {
+    res.status(201).json({
+      message: "User has been created",
+      data: user,
+    });
+  }
 });
 app.get("/user/:id", async (req, res) => {
   const { id } = req.params;
