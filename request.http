@@ -1,10 +1,10 @@
-get http://localhost:8080/users
+get http://localhost:8080/blog/api/users
 ###
-get http://localhost:8080/user/eb1773c4-6d83-47a1-9320-6dbe4150724b
+get http://localhost:8080/blog/api/user/3bbe460f-b43b-46af-84f9-e61b7be62476
 
 ### 
 
-post http://localhost:8080/user/register
+post http://localhost:8080/blog/api/user/register
 Content-Type: application/json 
 
 {
@@ -12,5 +12,24 @@ Content-Type: application/json
    "username": "john023",
    "email": "john02@email.com",
    "password": "123"
+   
+}
+
+### 
+# Posts
+get http://localhost:8080/posts
+###
+get http://localhost:8080/post/1
+
+### 
+
+post http://localhost:8080/post
+Content-Type: application/json 
+
+{
+   "title": "Learn Javascript first of learning NodeJs",
+    "description": "NodeJs is a main javascript run time.",
+   "content": "...",
+    "userId": "3bbe460f-b43b-46af-84f9-e61b7be62476",
    
 }
