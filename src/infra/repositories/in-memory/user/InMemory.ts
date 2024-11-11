@@ -24,6 +24,9 @@ class InMemory implements UserRepository {
   async getUserById(id: string): Promise<UserData> {
     return this.list.find((user) => user.id === id) as UserData;
   }
+  async getAllUsers(): Promise<UserData[]> {
+    return this.list;
+  }
 }
 
 export default new InMemory();

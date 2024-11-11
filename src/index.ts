@@ -3,6 +3,7 @@ import GetUser from "./application/usecases/user/GetUser";
 import InMemory from "./infra/repositories/in-memory/user/InMemory";
 import CreateUser from "./application/usecases/user/CreateUser";
 import cors from "cors";
+import GetAllUsers from "./application/usecases/user/GetAllUsers";
 
 const app = express();
 app.use(cors());
@@ -10,17 +11,16 @@ app.use(express.json());
 
 const port = 8080;
 
+app.get("/users", async (req, res) => {
+  const getAll = new GetAllUsers(InMemory);
+  const users = await getAll.execute();
+  res.status(200).json({
+    message: "Users",
+    quantity: users.length,
+    data: users,
+  });
+});
 app.get("/", async (req, res) => {
-  const input = {
-    fullName: "John Doe",
-    username: "john023",
-    email: "john01@email.com",
-    password: "123",
-    image: "http://image/john.png",
-  };
-  const createUser = new CreateUser(InMemory);
-  const user = await createUser.execute(input);
-  console.log(user);
   res.status(200).json({
     message: "Blog",
   });
